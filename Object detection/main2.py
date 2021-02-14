@@ -1,7 +1,19 @@
 import numpy as np
 import time
 import cv2
+import qrcode
 
+text = ''
+
+def qr_code_generator(text):
+    if 'bottle' in text:
+        score = 10
+    img = qrcode.make(score)
+    img.save("qrcode.png")
+    img=cv2.imread('qrcode.png')
+    cv2.imshow('Qrcode',img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 labelsPath = ("coco.names")
 LABELS = open(labelsPath).read().strip().split("\n")
 
@@ -52,7 +64,6 @@ while True:
                 confidences.append(float(confidence))
                 classIDs.append(classID)
     idxs = cv2.dnn.NMSBoxes(boxes, confidences, 0.6, 0.3)
-
     if len(idxs) > 0:
         for i in idxs.flatten():
             (x, y) = (boxes[i][0], boxes[i][1])
@@ -63,9 +74,10 @@ while True:
             cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
                         0.5, color, 2)
     cv2.imshow("Image", image)
+    print(text)
     key=cv2.waitKey(4)
     if key == ord('q'):
         break
-
+qr_code_generator(text)
 vs.release()
 cv2.destroyAllWindows()
