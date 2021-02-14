@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:barcode_scan/barcode_scan.dart';
+import 'scanpage.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   double littycoin = 38.322;
   @override
   Widget build(BuildContext context) {
@@ -76,9 +83,38 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          Container(
+            child: Column(
+              children: [
+                flatButton("Scan QR CODE", ScanPage()),
+                SizedBox(
+                  height: 200,
+                )
+              ],
+            ),
           )
         ],
       ),
     ));
+  }
+
+  Widget flatButton(String text, Widget widget) {
+    return FlatButton(
+      padding: EdgeInsets.all(15.0),
+      onPressed: () async {
+        String codeSanner = await BarcodeScanner.scan(); //barcode scnner
+        setState(() {
+          littycoin += int.parse(codeSanner);
+        });
+      },
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+      ),
+      shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.green, width: 3.0),
+          borderRadius: BorderRadius.circular(20.0)),
+    );
   }
 }
