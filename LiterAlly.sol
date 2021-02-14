@@ -23,73 +23,73 @@ contract LiterAlly is Ownable{
     
    
     struct Record{
-        string title;
-        string gpa;
+        string Bin;
+        string WasteType;
         string ipfsHash;
         uint fromOrgID;
         bool isVerifiedByOrganization;
     }
     
   
-    struct ResearchPaper{
-        string researchField;
-        string title;
+    struct Waste{
+        string Type;
+        float mass;
         string ipfsHash;
     }
 
-    //Struct for any achievemets in extraCurricular activities
-    struct extraCurricularAchievement {
-        string field;   //Field of achievement i.e. sports, cultural etc
-        string level;   // level of achievement i.e. regional, state, national etc
+   
+    struct UserPoints {
+        float WastePoints;   
+        float AllyPoints;   
         string ipfsHash;// hash from ipfs
         
     }
     
-    //Struct for any patents filed by the Student.
-    struct Patent{
+   
+    struct Ally{
         string title;
-        uint filedInYear;
+        string WasteType;
+        uint Value;
         string ipfsHash;
     }
 
 
     
-    //Struct for a organization
-    struct Organization{
-        uint orgCount;       //Organization ID
-        string name;  //Name of the organization
-        string typeOfOrganization;  //Type of Organization i.e. if it is a highSchool or a university
+   
+    struct LittyCoins{
+        uint orgCount;      
+        string BatchName;  
+        string typeOfOrganization;  
         uint orgUID;    
     }
     
     
 
 
-    //Struct of a student.
-    struct Student{
+    
+    struct Volunteer{
 
-        //Count of number of academic titles held, Number of degrees held by student.
-        uint academicRecords;  
         
-        // Record of all the academic titles/degrees held by student.
-        mapping(uint=>AcademicRecord) academics; 
+        uint Records;  
         
-        //Count of number of ResearchPaper published.
-        uint noOfPapersPublished;  
         
-        //Record of all the research papers published.
+        mapping(uint=>Record) Profile; 
+        
+        
+        uint noOfWasteManaged;  
+        
+       
         mapping(uint=>ResearchPaper) papersPublished;
         
-        //Count of total number of patents held by student.
+        
         uint noOfPatents; 
         
-        //Record of all patents.
+    
         mapping(uint=>Patent) patentsFiled; 
         
-        //Count of total number CoCurricular Achievements.
+      
         uint noOfExtraCurricularAchievements;
 
-        //All of patents held by student.
         mapping(uint=>extraCurricularAchievement) extraCurricularAchievements; 
     
     }
