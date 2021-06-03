@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:http/http.dart'; //You can also import the browser version
+import 'package:web3dart/web3dart.dart';
+
+
 import 'scanpage.dart';
 
 class HomePage extends StatefulWidget {
@@ -87,6 +91,17 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: Column(
               children: [
+                TextButton(onPressed: () async{
+                  var apiUrl = "http://localhost:8545"; //Replace with your API
+
+                  var httpClient = new Client();
+                  var ethClient = new Web3Client(apiUrl, httpClient);
+                  var credentials = EthereumAddress.fromHex("0xEE52d20b02629515C99332C0d16FbdD7D7f4CaaA");
+
+                  EtherAmount balance = await ethClient.getBalance(credentials);
+                  print(balance.getValueInUnit(EtherUnit.ether));
+                  littycoin= balance.getValueInUnit(EtherUnit.ether);
+                }, child: Text("Clickhere")),
                 flatButton("Scan QR CODE", ScanPage()),
                 SizedBox(
                   height: 200,

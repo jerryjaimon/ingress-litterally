@@ -3,6 +3,7 @@ import 'package:litterally/pages/signuppage1.dart';
 import 'pages/splashpage.dart';
 import 'pages/signuppage1.dart';
 import 'pages/homepage.dart';
+import 'pages/wastebinstats.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: wasteBinStats(),
     );
   }
 }
